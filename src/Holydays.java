@@ -1,48 +1,50 @@
+import java.util.HashMap;
+import java.util.Map;
+
 public class Holydays {
 
     String inputHolyday;
 
-    String[] dateHolydays = new String[] {
-            "01/01/2023", "21/02/2023", "17/04/2023",
-            "21/04/2023", "01/05/2023", "08/06/2023",
-            "07/09/2023", "12/10/2023", "02/11/2023",
-            "15/11/2023", "25/12/2023" };
+    Map<String, String> holydays = new HashMap<>();
 
-    String[] nameHolydays = new String[] {
-            "Confraternização mundial",
-            "Carnaval",
-            "Páscoa",
-            "Tiradentes",
-            "Dia do trabalho",
-            "Corpus Christi",
-            "Independência do Brasil",
-            "Nossa Senhora Aparecida",
-            "Finados",
-            "Proclamação da República",
-            "Natal"
-    };
-
-    public Holydays(String holyday) {
-        this.inputHolyday = holyday;
+    public Holydays() {
+        montaFeriados();
     }
 
-    public void verifyHolyday() {
+    public void verifyHolyday(String inputHolyday) {
 
-        for (int counter = 0; counter < dateHolydays.length; counter++) {
-            if (dateHolydays[counter].equals(inputHolyday)) {
-                System.out.println(nameHolydays[counter] + " - " + dateHolydays[counter]);
-                return;
-            }
+        String getHolyday = holydays.get(inputHolyday);
+
+        if (getHolyday == null) {
+            System.out.println("Não existe feriado nesta data");
+            return;
         }
-        System.out.println("Não existe feriado nesta data");
-        ;
+
+        System.out.println("Data: " + inputHolyday + ", feriado de: " + getHolyday);
+
+    }
+
+    public void addHoliday(String date, String name) {
+        holydays.put(date, name);
     }
 
     public void getAllHolydays() {
         System.out.println("Todos os feriados e suas datas:");
-        for (int counter = 0; counter < dateHolydays.length; counter++) {
-            System.out.println(nameHolydays[counter] + " - " + dateHolydays[counter]);
-        }
+        holydays.forEach((key, value) -> System.out.println("Data: " + key + ", feriado de: " + value));
+    }
+
+    public void montaFeriados() {
+        holydays.put("01/01/2023", "Confraternização mundial");
+        holydays.put("21/02/2023", "Carnaval");
+        holydays.put("17/04/2023", "Páscoa");
+        holydays.put("21/04/2023", "Tiradentes");
+        holydays.put("01/05/2023", "Dia do trabalho");
+        holydays.put("08/06/2023", "Corpus Christi");
+        holydays.put("07/09/2023", "Independência do Brasil");
+        holydays.put("12/10/2023", "Nossa Senhora Aparecida");
+        holydays.put("02/11/2023", "Finados");
+        holydays.put("15/11/2023", "Proclamação da República");
+        holydays.put("25/12/2023", "Natal");
     }
 
 }
